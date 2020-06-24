@@ -1,0 +1,36 @@
+{
+    "indexdata":[
+            {
+                "heading":"Stop Thinking And Start Doing",
+                "summary":"Get out of your head. Every good decision starts with a momment of action. What are you going to do today",
+                "writer":"Fred Smith",
+                "category":"Motivation",
+                "image":"michelle.jpg",
+                "writerimage":"fred.jpg",
+                "like":"",
+                "comment":"1",
+                "time":"10"
+            },
+            {   "heading":"Stop Thinking And Start Doing",
+                "summary":"Get out of your head. Every good decision starts with a momment of action. What are you going to do today",
+                "writer":"Fred Smith",
+                "category":"Motivation",
+                "image":"fred.jpg",
+                "writerimage":"michelle.jpg",
+                "like":"",
+                "comment":"1",
+                "time":"10"
+            },
+            {
+                "heading":"Stop Thinking And Start Doing",
+                "summary":"Get out of your head. Every good decision starts with a momment of action. What are you going to do today",
+                "writer":"Fred Smith",
+                "category":"Motivation",
+                "image":"michelle.jpg",
+                "writerimage":"fred.jpg",
+                "like":"",
+                "comment":"1",
+                "time":"10"
+            }
+        ]
+}
