@@ -39,7 +39,7 @@ if(isset($_POST['submit']) && !empty($_FILES['file']['name'])){
         echo '<script>alert("Invalid Image Type") </script>'; 
     } 
     $heading = $_POST['heading'];
-    $subheading = $_POST['sub-heading'];
+    $subheading = $_POST['subheading'];
     $content = $_POST['content'];
     $cat = $_POST['cat'];
     $row = mysqli_fetch_array(mysqli_query($connect,"SELECT MAX(id) FROM writer"));
@@ -47,7 +47,6 @@ if(isset($_POST['submit']) && !empty($_FILES['file']['name'])){
 
     $query = "INSERT INTO `writer`(`id`, `heading`, `content`, `date`, `total_like`, `comment`, `writerimg`, `writername`, `category`, `tags`)
                  VALUES ('','$heading','$content','$date','10','comment','$path','name','$cat','$subheading')";
-    // $query = "INSERT INTO writer ('id','heading','tags','content', 'date', 'total_like','writerimg','category') VALUES ('34','errg','wlkerg','erkg ','20-20-20','10','ern gerf.jpg','ertgrt')";
     $query_run = mysqli_query($connect,$query) or die("Something Went Wrong");
     if($query_run) 
     {
