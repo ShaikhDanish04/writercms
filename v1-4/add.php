@@ -2,19 +2,9 @@
 <html class="no-js">
 
 <?php include('includes/head.php');?>
-<?php 
-$id = $_GET['id'];
-$postdata = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM writer where id='$id'"));
 
 
-$imgsplit = explode('/',$postdata['writerimg']);
-if ( !isset($imgsplit[1])) {
-    $imgsplit[1] = null;
- }
-
-?>
-
-<body class="">
+  <body class="">
 
 
 <header>
@@ -26,12 +16,12 @@ if ( !isset($imgsplit[1])) {
 
         <div class="col-xs-12 col-md-8 single-content-sidebar" style="padding-bottom: 0px;">
 
-            <h3>Edit Your Post</h3>
+            <h3>Write Your Post</h3>
 
-            <form method="POST" action="update.php?id=<?php echo $id ?>" enctype="multipart/form-data">
+            <form method="POST" action="insertdata.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="heading">Title</label>
-                    <input type="text" placeholder="Enter Your Heading of Post" class="form-control" name="heading" value="<?php echo $postdata['heading']?>">
+                    <input type="text" placeholder="Enter Your Heading of Post" class="form-control" name="heading">
                 </div>
                     <div id="form">
                     <div class="form-group">
@@ -39,8 +29,8 @@ if ( !isset($imgsplit[1])) {
                             <div class="col-xs-6">
                                 <label>Select Post Category</label>
                                 <select class="form-control" name="cat">
-                                    <option value="<?php echo $postdata['category']?>" selected><?php echo $postdata['category']?></option>
-                                    <option value="">Motivation</option>
+                                    <option value="" disabled selected>Choose your country</option>
+                                    <option value="Motivation">Motivation</option>
                                     <option value="Leadership">Leadership</option>
                                     <option value="Journey">Journey</option>
                                     <option value="Storytime">Storytime</option>
@@ -53,37 +43,24 @@ if ( !isset($imgsplit[1])) {
                         <div class="row">
                             <div class="col-xs-12">
                             <label>Select Image</label>
-                            <?php 
-                            if($imgsplit[1]==""){
-                            ?>
                                 <div class="custom-file form-control">
                                     <input type="file" class="custom-file-input" id="customFile" name="file">
                                     <label class="custom-file-label mt-0" for="customFile" style="font-size: 15.5px;">Choose file</label>          
                                 </div>
-                            <?php 
-                            }
-                            else{
-                                ?>
-                                <div class="custom-file form-control">
-                                    <input type="file" class="custom-file-input" id="customFile" name="file" value="<?php echo $imgsplit[1];?>">
-                                    <label class="custom-file-label selected mt-0" for="customFile" style="font-size: 15.5px;"><?php echo $imgsplit[1];?></label>  
-                                </div>  
-                                <img src="img/<?php echo $imgsplit[1];?>" class="" style="display:block; margin-left: auto;  margin-right: auto; margin-top:2rem;margin-bottom:2rem; height : 70%; width : 35%;" />        
-                            <?php } ?>    
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="sub-heading">Sub Heading</label>
-                        <input type="text" placeholder="Enter Sub-Heading" class="form-control" id="subheading" name="subheading" value="<?php echo $postdata['tags']?>">
+                        <input type="text" placeholder="Enter Sub-Heading" class="form-control" id="subheading" name="subheading">
                     </div>
                     <div class="form-group">
                         <label for="sub-heading">Summary</label>
-                        <input type="text" placeholder="Enter Summary" class="form-control" id="summary" name="summary" value="<?php echo $postdata['summary']?>">
+                        <input type="text" placeholder="Enter Summary" class="form-control" id="summary" name="summary">
                     </div>
                     <div class="form-group">
                         <label for="content">Content</label>
-                        <textarea class="form-control" name="content" placeholder="Enter Content Here"><?php echo $postdata['content']?></textarea>
+                        <textarea class="form-control" name="content" placeholder="Enter Content Here"></textarea>
                     </div>
                     </div>
                 <div class="form-group">

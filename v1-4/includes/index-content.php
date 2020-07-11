@@ -1,36 +1,57 @@
 <div class="home-page-posts animated fadeIn ">
 <?php 
-$jsondata = file_get_contents("./data.json");
-$json = json_decode($jsondata,true);
-foreach( $json['indexdata'] as $postdata)
+
+$query = "SELECT * FROM writer ORDER BY date DESC";
+$query_run = mysqli_query($connect,$query) or die("Something Went Wrong");
+
+if(mysqli_num_rows($query_run)>0)
 {
-?>
+    while($postdata = mysqli_fetch_array($query_run))
+    {
+    ?>
     <article class="post">
             <div class="post-preview col-xs-10  no-gutter">
                 <a href="stop-thinking-and-start-doing.html">
+                    <!-- <script>
+                        $imgdata = "<?php echo $postdata['writerimg']?>";
+                        console.log($imgdata);
+                        if($imgdata == 0){
+                            console.log('abc');
+                            $('div.card.mb-4').remove();
+                        }
+                    </script> -->
                         <div class="card mb-4"> 
-                            <img class="card-img-top" src="./img/<?php echo $postdata['image']?>">
+                            <a href="blog.php?id=<?php echo $postdata['id']?>"><img class="card-img-top" src="./<?php echo $postdata['writerimg']?>"></a>
                         </div>
                     </a>
-                    <h2><a href="stop-thinking-and-start-doing.html"><?php echo $postdata['heading']?></a></h2>
+                    <h2><a href="blog.php?id=<?php echo $postdata['id']?>"><?php echo $postdata['heading']?></a></h2>
                     <p><?php echo $postdata['summary']?></p>
                     <div class="meta" style="margin: 0;">
-                        <a href=""><?php echo $postdata['writer'];?></a> in <a href=''><?php echo $postdata['category']?></a> <i class="link-spacer"></i> <i class="fa fa-bookmark"></i> <?php echo $postdata['time']?> minutes    
+                        <a href=""><?php echo $postdata['writername'];?></a> in <a href=''><?php echo $postdata['category']?></a> <i class="link-spacer"></i> <i class="fa fa-bookmark"></i> <?php echo $postdata['date']?> minutes    
                     </div>    
                     <div class="meta" style="margin: 0;">
-                        <a href="#"> 20 Reviews | <?php echo $postdata['comment']?> Comments</a>
+                        <a href="#"> 20 Reviews | Comments</a>
                         <div class="stars"> 
                         </div>
                     </div>
             </div>
             
             <div class="d-flex flex-column align-items-center justify-content-between col-xs-2  no-gutter">
-                <img src="./img/<?php echo $postdata['writerimage']?>" class="user-icon user-1" alt="user-image">
-                <a class="like-button mt-5" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-                <a class="like-button mt-5" href="#"><i class="fa fa-share" aria-hidden="true"></i></a>
+                <img src="./img/fred.jpg" class="user-icon user-1" alt="user-image">
+                <!-- <a class="like-button mt-5" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                <a class="like-button mt-5" href="#"><i class="fa fa-share" aria-hidden="true"></i></a> -->
             </div>    
     </article>
-<?php } ?>  
+    <?php
+
+    }
+}
+else
+{
+    echo '<script> alert("Something Went Wrong");</script>';
+}
+?>
+
         <script>
             $(document).ready(function(){
                 // $("a.like-button.mt-5").click(function(){
