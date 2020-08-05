@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="css/main.css">
    
     <style>
-        td{ vertical-align: middle !important; }
-
         div.star{display:inline;}
         input.star { display: none; }
 

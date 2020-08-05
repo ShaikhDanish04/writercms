@@ -14,8 +14,8 @@ date_default_timezone_set('Asia/Kolkata');
 $date = date('Y-m-d H:i:s');
 
 $allowedExt = array('jpg','png','jpeg','gif');
-$path = '';
-if(isset($_POST['submit']) || !empty($_FILES['file']['name'])){ 
+
+if(isset($_POST['submit']) && !empty($_FILES['file']['name'])){ 
     if(in_array($fileActualExt,$allowedExt))
     {
         if($fileError===0)
@@ -38,23 +38,20 @@ if(isset($_POST['submit']) || !empty($_FILES['file']['name'])){
     { 
         echo '<script>alert("Invalid Image Type") </script>'; 
     } 
-
     $heading = $_POST['heading'];
     $subheading = $_POST['subheading'];
     $content = $_POST['content'];
     $cat = $_POST['cat'];
-    $summary = $_POST['summary'];
     $row = mysqli_fetch_array(mysqli_query($connect,"SELECT MAX(id) FROM writer"));
     $id = $row['MAX(id)']+1;
 
-    $query = "INSERT INTO `writer`(`id`, `heading`, `content`, `date`, `total_like`, `comment`, `writerimg`, `writername`, `category`, `tags`,`summary`)
-                 VALUES ('','$heading','$content','$date','10','comment','$path','name','$cat','$subheading','$summary')";
+    $query = "INSERT INTO `writer`(`id`, `heading`, `content`, `date`, `total_like`, `comment`, `writerimg`, `writername`, `category`, `tags`)
+                 VALUES ('','$heading','$content','$date','10','comment','$path','name','$cat','$subheading')";
     $query_run = mysqli_query($connect,$query) or die("Something Went Wrong");
     if($query_run) 
-    {   
-        echo '<script> alert("Data Inserted Successfully") </script>';
-        header("Location:manage.php");
-         
+    {
+        header("Location:edit.php");
+        echo '<script>alert("Data Inserted Successfully") </script>'; 
     }
     else{
         echo '<script>alert("Something Went Wrong") </script>'; 
