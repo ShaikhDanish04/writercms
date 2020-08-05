@@ -1,5 +1,7 @@
+
 <?php 
 require "includes/head.php";
+$id = $_GET['id'];
 $uploadPath = 'img/'; 
 $fileName = $_FILES['file']['name'];
 $fileTmpName = $_FILES['file']['tmp_name'];
@@ -9,7 +11,6 @@ $fileSize = $_FILES['file']['size'];
 
 $fileExt = explode('.',$fileName);
 $fileActualExt = strtolower(end($fileExt));
-
 date_default_timezone_set('Asia/Kolkata'); 
 $date = date('Y-m-d H:i:s');
 
@@ -21,9 +22,9 @@ if(isset($_POST['submit']) || !empty($_FILES['file']['name'])){
         if($fileError===0)
         { 
             // if($fileSize < 50000){
-                $fileNameNew = uniqid('',true).".".$fileActualExt;
-                move_uploaded_file($fileTmpName, $uploadPath.$fileNameNew);
-                $path = $uploadPath.$fileNameNew;
+                // $fileNameNew = uniqid('',true).".".$fileActualExt;
+                move_uploaded_file($fileTmpName, $uploadPath.$id);
+                $path = $uploadPath.$id;
             // }
             // else{
             //     echo '<script>alert("File Should be less than 5MB") </script>'; 
@@ -44,16 +45,25 @@ if(isset($_POST['submit']) || !empty($_FILES['file']['name'])){
     $content = $_POST['content'];
     $cat = $_POST['cat'];
     $summary = $_POST['summary'];
-    $row = mysqli_fetch_array(mysqli_query($connect,"SELECT MAX(id) FROM writer"));
-    $id = $row['MAX(id)']+1;
 
-    $query = "INSERT INTO `writer`(`id`, `heading`, `content`, `date`, `total_like`, `comment`, `writerimg`, `writername`, `category`, `tags`,`summary`)
-                 VALUES ('','$heading','$content','$date','10','comment','$path','name','$cat','$subheading','$summary')";
+    $query = "UPDATE writer
+                SET 
+                heading = '$heading' , 
+                content = '$content' ,
+                date = '$date' , 
+                total_like = 10, 
+                comment = 'comment',
+                writerimg = '$path' , 
+                writername = 'name',
+                category = '$cat' ,
+                tags = '$subheading' ,
+                summary = '$summary'
+                WHERE id = $id";
+
     $query_run = mysqli_query($connect,$query) or die("Something Went Wrong");
     if($query_run) 
     {   
-        echo '<script> alert("Data Inserted Successfully") </script>';
-        header("Location:manage.php");
+        echo '<script> alert("Data Updated Successfully") </script>';
          
     }
     else{
